@@ -16,6 +16,7 @@ class DJBot(token: String) {
     private val musicPlayer = MusicPlayer()
 
     init {
+        logger.info("Starting with token: $token")
         registerCommandManager()
         client.login()
     }
