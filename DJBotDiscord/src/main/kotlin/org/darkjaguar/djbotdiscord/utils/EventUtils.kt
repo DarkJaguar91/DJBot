@@ -8,11 +8,11 @@ import sx.blah.discord.handle.obj.IMessage
 import sx.blah.discord.util.DiscordException
 import sx.blah.discord.util.RequestBuffer
 
-fun ChannelEvent.sendMessage(message: () -> String, deleteDelay: Long = -1) {
-    channel.sendMessage(message, deleteDelay)
+fun ChannelEvent.sendMessage(deleteDelay: Long = -1, message: () -> String) {
+    channel.sendMessage(deleteDelay, message)
 }
 
-fun IChannel.sendMessage(message: () -> String, deleteDelay: Long = -1) {
+fun IChannel.sendMessage(deleteDelay: Long = -1, message: () -> String) {
     RequestBuffer.request {
         try {
             sendMessage(message()).also {
