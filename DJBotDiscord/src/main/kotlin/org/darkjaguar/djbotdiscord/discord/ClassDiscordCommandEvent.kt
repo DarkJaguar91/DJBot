@@ -5,14 +5,14 @@ import org.darkjaguar.djbotdiscord.utils.deleteMessage
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent
 
 class ClassDiscordCommandEvent(private val provider: ClassDiscordProvider = ClassDiscordProvider()): CommandEvent {
-    override val command: List<String>
+    override val commands: List<String>
         get() = listOf("discord")
 
     override fun onEvent(event: MessageReceivedEvent, args: List<String>) {
         event.deleteMessage()
 
         if (args.isEmpty()) {
-            event.message.author.orCreatePMChannel.sendMessage("Please provide a class you would like the discord link/s for.\n`/discord priest`\n`/discord warrior`")
+            event.message.author.orCreatePMChannel.sendMessage("Please provide a class you would like the discord link/s for.\nFor example:\n```/discord priest/discord warrior```")
             return
         }
 

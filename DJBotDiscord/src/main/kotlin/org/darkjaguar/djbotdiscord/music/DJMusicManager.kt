@@ -6,11 +6,12 @@ import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack
+import org.darkjaguar.djbotdiscord.logging.logger
 import sx.blah.discord.handle.obj.IChannel
 import sx.blah.discord.handle.obj.IGuild
 
 
-class MusicPlayer {
+class DJMusicManager {
     private val playerManager = DefaultAudioPlayerManager()
     private val musicManagers = HashMap<Long, GuildMusicManager>()
 
@@ -19,7 +20,7 @@ class MusicPlayer {
         AudioSourceManagers.registerLocalSource(playerManager)
 
 //        CommandEventManager.registerCommand(object : CommandEvent {
-//            override val command: String
+//            override val commands: String
 //                get() = "join"
 //
 //            override fun onEvent(event: MessageReceivedEvent, args: List<String>) {
@@ -28,7 +29,7 @@ class MusicPlayer {
 //            }
 //        })
 //        CommandEventManager.registerCommand(object : CommandEvent {
-//            override val command: String
+//            override val commands: String
 //                get() = "leave"
 //
 //            override fun onEvent(event: MessageReceivedEvent, args: List<String>) {
@@ -43,7 +44,7 @@ class MusicPlayer {
 //            }
 //        })
 //        CommandEventManager.registerCommand(object : CommandEvent {
-//            override val command: String
+//            override val commands: String
 //                get() = "play"
 //
 //            override fun onEvent(event: MessageReceivedEvent, args: List<String>) {
@@ -55,7 +56,7 @@ class MusicPlayer {
 //            }
 //        })
 //        CommandEventManager.registerCommand(object : CommandEvent {
-//            override val command: String
+//            override val commands: String
 //                get() = "skip"
 //
 //            override fun onEvent(event: MessageReceivedEvent, args: List<String>) {
@@ -67,7 +68,7 @@ class MusicPlayer {
 //            }
 //        })
 //        CommandEventManager.registerCommand(object : CommandEvent {
-//            override val command: String
+//            override val commands: String
 //                get() = "volume"
 //
 //            override fun onEvent(event: MessageReceivedEvent, args: List<String>) {
@@ -81,6 +82,7 @@ class MusicPlayer {
 //                    }
 //                } // TODO send message that cant play song cus not in channel
 //                event.message.addReaction(EmojiManager.getForAlias("thumbsup"))
+//                event.message.delete(2000)
 //            }
 //        })
     }
@@ -106,6 +108,7 @@ class MusicPlayer {
         playerManager.loadItemOrdered(musicManager, trackUrl, object : AudioLoadResultHandler {
             override fun trackLoaded(track: AudioTrack) {
                 //BotUtils.sendMessage(channel, "Adding to queue " + track.getInfo().title)
+                logger.info { track.info.toString() }
 
                 play(musicManager, track)
             }

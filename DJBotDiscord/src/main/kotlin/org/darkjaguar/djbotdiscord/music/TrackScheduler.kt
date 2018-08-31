@@ -42,7 +42,7 @@ class TrackScheduler(private val player: AudioPlayer) {
         return currentTrack
     }
 
-    fun getQueue(): MutableList<AudioTrack> {
+    fun getQueue(): List<AudioTrack> {
         return this.queue
     }
 }

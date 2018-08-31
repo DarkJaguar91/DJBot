@@ -8,7 +8,7 @@ import java.util.*
 class RollCommandEvent : CommandEvent {
     private val random = Random()
 
-    override val command: List<String>
+    override val commands: List<String>
         get() = listOf("roll")
 
     override fun onEvent(event: MessageReceivedEvent, args: List<String>) {

@@ -1,5 +1,6 @@
 package org.darkjaguar.djbotdiscord
 
+import com.beust.jcommander.JCommander
 import org.darkjaguar.djbotdiscord.config.DJBotConfig
 import org.darkjaguar.djbotdiscord.discord.ClassDiscordCommandEvent
 import org.darkjaguar.djbotdiscord.events.CommandEventManager
@@ -7,11 +8,10 @@ import org.darkjaguar.djbotdiscord.roll.RollCommandEvent
 import sx.blah.discord.api.ClientBuilder
 import sx.blah.discord.api.events.EventDispatcher
 
-class DJBot(token: String) {
+class DJBot(private val config: DJBotConfig) {
     private val client = ClientBuilder()
-            .withToken(token)
-            .build()
-    private val config = DJBotConfig()
+        .withToken(config.token)
+        .build()
 
     init {
         registerListeners(client.dispatcher!!)
@@ -26,13 +26,16 @@ class DJBot(token: String) {
 
     private fun createCommandEventManager(): Any {
         return CommandEventManager(
-                config,
-                RollCommandEvent(),
-                ClassDiscordCommandEvent()
+            config,
+            RollCommandEvent(),
+            ClassDiscordCommandEvent()
         )
     }
 }
 
 fun main(args: Array<String>) {
-    DJBot("NDgxMjI0OTUyMzU2Mjc0MTg3.Dmp23Q.C1D3HplptjlD29g55bBgCa21wxo")
+    val config = DJBotConfig()
+    JCommander.newBuilder().addObject(config).build().parse(*args)
+
+    DJBot(config)
 }
