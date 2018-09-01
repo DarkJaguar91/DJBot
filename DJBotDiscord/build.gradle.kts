@@ -15,6 +15,8 @@ dependencies {
     compile(group = "com.sedmelluq", name = "lavaplayer", version = "1.3.7")
     compile("com.beust:jcommander:1.71")
 
+    compile("org.apache.logging.log4j:log4j-slf4j-impl:2.11.1")
+
     testCompile(kotlin("test"))
     testCompile("org.junit.jupiter:junit-jupiter-api:5.2.0")
     testCompile("com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC1")

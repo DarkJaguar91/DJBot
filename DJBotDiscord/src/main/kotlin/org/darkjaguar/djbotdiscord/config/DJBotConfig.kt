@@ -4,7 +4,7 @@ import com.beust.jcommander.Parameter
 
 class DJBotConfig {
     @Parameter(names = ["-t", "-token"], description = "Discord access token for the DJBot.", required = true)
-    internal var token: String? = null
+    var token: String? = null
 
     @Parameter(names = ["-prefix", "-commandPrefix"], description = "Command prefix for DJBot commands. Defaults to '/'")
     var commandPrefix: String = "/"
