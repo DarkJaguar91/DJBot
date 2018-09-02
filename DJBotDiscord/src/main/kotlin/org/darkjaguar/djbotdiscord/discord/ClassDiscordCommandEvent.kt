@@ -2,6 +2,7 @@ package org.darkjaguar.djbotdiscord.discord
 
 import org.darkjaguar.djbotdiscord.events.interfaces.CommandEvent
 import org.darkjaguar.djbotdiscord.utils.deleteMessage
+import org.darkjaguar.djbotdiscord.utils.sendMessage
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent
 
 class ClassDiscordCommandEvent(private val provider: ClassDiscordProvider = ClassDiscordProvider()): CommandEvent {
@@ -20,10 +21,10 @@ class ClassDiscordCommandEvent(private val provider: ClassDiscordProvider = Clas
         val discords = provider.getDiscordsFor(name)
 
         if (discords.isEmpty()) {
-            event.message.author.orCreatePMChannel.sendMessage("Could not find any discords for class: $name")
+            event.message.author.orCreatePMChannel.sendMessage { "Could not find any discords for class: $name" }
             return
         }
 
-        event.message.author.orCreatePMChannel.sendMessage("${name.capitalize()}: ${discords.joinToString(", ")}")
+        event.message.author.orCreatePMChannel.sendMessage { "${name.capitalize()}: ${discords.joinToString(", ")}" }
     }
 }

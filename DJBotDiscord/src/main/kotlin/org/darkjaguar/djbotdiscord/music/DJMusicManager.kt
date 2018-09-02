@@ -13,7 +13,7 @@ import sx.blah.discord.handle.obj.IGuild
 
 class DJMusicManager {
     private val playerManager = DefaultAudioPlayerManager()
-    private val musicManagers = HashMap<Long, GuildMusicManager>()
+    private val musicManagers = HashMap<Long, DJGuildPlayerData>()
 
     init {
         AudioSourceManagers.registerRemoteSources(playerManager)
@@ -88,12 +88,12 @@ class DJMusicManager {
     }
 
     @Synchronized
-    fun getGuildAudioPlayer(guild: IGuild): GuildMusicManager {
+    fun getGuildAudioPlayer(guild: IGuild): DJGuildPlayerData {
         val guildId = guild.longID
         var musicManager = musicManagers[guildId]
 
         if (musicManager == null) {
-            musicManager = GuildMusicManager(playerManager)
+            musicManager = DJGuildPlayerData(playerManager)
             musicManagers[guildId] = musicManager
         }
 
@@ -135,8 +135,8 @@ class DJMusicManager {
         })
     }
 
-    private fun play(musicManager: GuildMusicManager, track: AudioTrack?) {
-        musicManager.scheduler.queue(track!!)
+    private fun play(playerData: DJGuildPlayerData, track: AudioTrack?) {
+        playerData.scheduler.queue(track!!)
     }
 
     private fun skipTrack(channel: IChannel) {

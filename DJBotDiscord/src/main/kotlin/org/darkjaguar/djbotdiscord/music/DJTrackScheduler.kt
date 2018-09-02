@@ -7,7 +7,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason
 import java.util.*
 
 
-class TrackScheduler(private val player: AudioPlayer) {
+class DJTrackScheduler(private val player: AudioPlayer) {
     private val queue: MutableList<AudioTrack> = Collections.synchronizedList(LinkedList())
 
     init {

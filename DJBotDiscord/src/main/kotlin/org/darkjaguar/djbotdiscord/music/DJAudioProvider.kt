@@ -6,7 +6,7 @@ import sx.blah.discord.handle.audio.AudioEncodingType
 import sx.blah.discord.handle.audio.IAudioProvider
 
 
-class AudioProvider(private val audioPlayer: AudioPlayer) : IAudioProvider {
+class DJAudioProvider(private val audioPlayer: AudioPlayer) : IAudioProvider {
     private var lastFrame: AudioFrame? = null
 
     override fun isReady(): Boolean {
@@ -22,14 +22,10 @@ class AudioProvider(private val audioPlayer: AudioPlayer) : IAudioProvider {
             lastFrame = audioPlayer.provide()
         }
 
-        val data = if (lastFrame != null) lastFrame!!.data else null
+        val data = lastFrame?.data
         lastFrame = null
 
         return data
-    }
-
-    override fun getChannels(): Int {
-        return 2
     }
 
     override fun getAudioEncodingType(): AudioEncodingType {
